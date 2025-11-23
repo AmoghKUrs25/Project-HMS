@@ -4,20 +4,15 @@ pipeline {
     environment {
         IMAGE_NAME      = "hms-app-image"
         CONTAINER_NAME  = "hms-app-container"
-        HOST_PORT       = "9000"
-        CONTAINER_PORT  = "8082"
+        HOST_PORT       = "9000"    // browser
+        CONTAINER_PORT  = "8082"    // Spring Boot port inside container
     }
 
     stages {
-        stage('Checkout from Git') {
-            steps {
-                git branch: 'main',
-                    url: 'https://github.com/AmoghKUrs25/Project-HMS.git'
-            }
-        }
 
         stage('Build & Test') {
             steps {
+                // use Maven Wrapper on Windows
                 bat 'mvnw.cmd clean test'
                 bat 'mvnw.cmd package -DskipTests'
             }
@@ -42,3 +37,4 @@ pipeline {
         }
     }
 }
+
