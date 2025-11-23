@@ -1,0 +1,46 @@
+package com.example.hms.controller;
+
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@RestController
+@RequestMapping("/patients")
+public class PatientController {
+
+    static class Patient {
+        public int id;
+        public String name;
+        public int age;
+        public String disease;
+
+        public Patient(int id, String name, int age, String disease) {
+            this.id = id;
+            this.name = name;
+            this.age = age;
+            this.disease = disease;
+        }
+    }
+
+    private List<Patient> patients = new ArrayList<>();
+
+    public PatientController() {
+        // Sample data
+        patients.add(new Patient(1, "Amogh", 22, "Fever"));
+        patients.add(new Patient(2, "Riya", 30, "Flu"));
+    }
+
+    @GetMapping
+    public List<Patient> getAllPatients() {
+        return patients;
+    }
+
+    @PostMapping
+    public Patient addPatient(@RequestBody Patient patient) {
+        patient.id = patients.size() + 1;
+        patients.add(patient);
+        return patient;
+    }
+}
+
