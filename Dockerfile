@@ -6,6 +6,6 @@ WORKDIR /app
 COPY target/*.jar app.jar
 
 # this must match your Spring Boot server.port
-EXPOSE 8090
+EXPOSE 8082
 
 ENTRYPOINT ["java", "-jar", "app.jar"]
