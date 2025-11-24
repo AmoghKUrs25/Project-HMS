@@ -1,10 +1,15 @@
 package com.example.hms.controller;
 
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/appointments")
@@ -29,10 +34,8 @@ public class AppointmentController {
     private final List<Appointment> appointments = new ArrayList<>();
 
     public AppointmentController() {
-        appointments.add(new Appointment(1, "Amogh", "Dr. Sharma",
-                LocalDate.now(), "Scheduled"));
-        appointments.add(new Appointment(2, "Riya", "Dr. Priya",
-                LocalDate.now().plusDays(1), "Pending"));
+        appointments.add(new Appointment(1, "Amogh", "Dr. Sharma", LocalDate.now(), "Scheduled"));
+        appointments.add(new Appointment(2, "Riya", "Dr. Priya", LocalDate.now().plusDays(1), "Pending"));
     }
 
     @GetMapping
