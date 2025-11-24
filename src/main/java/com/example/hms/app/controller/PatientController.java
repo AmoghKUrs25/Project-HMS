@@ -1,4 +1,4 @@
-package com.example.hms.controller;
+package com.example.hms.app.controller;
 
 import org.springframework.web.bind.annotation.*;
 
