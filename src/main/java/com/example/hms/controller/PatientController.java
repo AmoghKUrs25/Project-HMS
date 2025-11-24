@@ -9,7 +9,6 @@ import java.util.*;
 @RestController
 public class PatientController {
 
-    // ====== Inner DTO classes ======
     static class Patient {
         public int id;
         public String name;
@@ -54,26 +53,22 @@ public class PatientController {
         }
     }
 
-    // ====== In-memory data ======
     private final List<Patient> patients = new ArrayList<>();
     private final List<Doctor> doctors = new ArrayList<>();
     private final List<Appointment> appointments = new ArrayList<>();
 
     public PatientController() {
-        // Sample Patients
         patients.add(new Patient(1, "Amogh", 22, "Fever"));
         patients.add(new Patient(2, "Riya", 25, "Flu"));
 
-        // Sample Doctors
         doctors.add(new Doctor(1, "Dr. Sharma", "Cardiologist", 10));
         doctors.add(new Doctor(2, "Dr. Priya", "Pediatrician", 7));
 
-        // Sample Appointments
         appointments.add(new Appointment(1, "Amogh", "Dr. Sharma", LocalDate.now(), "Scheduled"));
         appointments.add(new Appointment(2, "Riya", "Dr. Priya", LocalDate.now().plusDays(1), "Pending"));
     }
 
-    // ====== /patients ======
+    // ✅ THIS is the key: /patients returns a WRAPPER object, not just list
     @GetMapping("/patients")
     public Map<String, Object> getAllPatients() {
         Map<String, Object> response = new HashMap<>();
@@ -92,7 +87,6 @@ public class PatientController {
         return patient;
     }
 
-    // ====== /doctors ======
     @GetMapping("/doctors")
     public Map<String, Object> getAllDoctors() {
         Map<String, Object> response = new HashMap<>();
@@ -104,7 +98,6 @@ public class PatientController {
         return response;
     }
 
-    // ====== /appointments ======
     @GetMapping("/appointments")
     public Map<String, Object> getAllAppointments() {
         Map<String, Object> response = new HashMap<>();
