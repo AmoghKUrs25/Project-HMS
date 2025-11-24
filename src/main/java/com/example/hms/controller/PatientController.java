@@ -26,17 +26,13 @@ public class PatientController {
         }
     }
 
-    // Single patients list
     private final List<Patient> patients = new ArrayList<>();
 
-    // Single constructor
     public PatientController() {
-        // Sample data
         patients.add(new Patient(1, "Amogh", 22, "Fever"));
-        patients.add(new Patient(2, "Riya", 27, "Flu"));
+        patients.add(new Patient(2, "Riya", 25, "Flu"));
     }
 
-    // ✅ Attractive structured JSON response
     @GetMapping
     public Map<String, Object> getAllPatients() {
         Map<String, Object> response = new HashMap<>();
@@ -55,3 +51,4 @@ public class PatientController {
         return patient;
     }
 }
+
