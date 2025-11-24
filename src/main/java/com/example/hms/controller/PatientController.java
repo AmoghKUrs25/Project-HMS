@@ -2,16 +2,14 @@ package com.example.hms.controller;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
-@RequestMapping("/patients")
 public class PatientController {
 
+    // ====== Inner DTO classes ======
     static class Patient {
         public int id;
         public String name;
@@ -26,14 +24,57 @@ public class PatientController {
         }
     }
 
-    private final List<Patient> patients = new ArrayList<>();
+    static class Doctor {
+        public int id;
+        public String name;
+        public String specialization;
+        public int experienceYears;
 
-    public PatientController() {
-        patients.add(new Patient(1, "Amogh", 22, "Fever"));
-        patients.add(new Patient(2, "Riya", 25, "Flu"));
+        public Doctor(int id, String name, String specialization, int experienceYears) {
+            this.id = id;
+            this.name = name;
+            this.specialization = specialization;
+            this.experienceYears = experienceYears;
+        }
     }
 
-    @GetMapping
+    static class Appointment {
+        public int id;
+        public String patientName;
+        public String doctorName;
+        public LocalDate date;
+        public String status;
+
+        public Appointment(int id, String patientName, String doctorName, LocalDate date, String status) {
+            this.id = id;
+            this.patientName = patientName;
+            this.doctorName = doctorName;
+            this.date = date;
+            this.status = status;
+        }
+    }
+
+    // ====== In-memory data ======
+    private final List<Patient> patients = new ArrayList<>();
+    private final List<Doctor> doctors = new ArrayList<>();
+    private final List<Appointment> appointments = new ArrayList<>();
+
+    public PatientController() {
+        // Sample Patients
+        patients.add(new Patient(1, "Amogh", 22, "Fever"));
+        patients.add(new Patient(2, "Riya", 25, "Flu"));
+
+        // Sample Doctors
+        doctors.add(new Doctor(1, "Dr. Sharma", "Cardiologist", 10));
+        doctors.add(new Doctor(2, "Dr. Priya", "Pediatrician", 7));
+
+        // Sample Appointments
+        appointments.add(new Appointment(1, "Amogh", "Dr. Sharma", LocalDate.now(), "Scheduled"));
+        appointments.add(new Appointment(2, "Riya", "Dr. Priya", LocalDate.now().plusDays(1), "Pending"));
+    }
+
+    // ====== /patients ======
+    @GetMapping("/patients")
     public Map<String, Object> getAllPatients() {
         Map<String, Object> response = new HashMap<>();
         response.put("status", "success");
@@ -44,11 +85,34 @@ public class PatientController {
         return response;
     }
 
-    @PostMapping
+    @PostMapping("/patients")
     public Patient addPatient(@RequestBody Patient patient) {
         patient.id = patients.size() + 1;
         patients.add(patient);
         return patient;
     }
-}
 
+    // ====== /doctors ======
+    @GetMapping("/doctors")
+    public Map<String, Object> getAllDoctors() {
+        Map<String, Object> response = new HashMap<>();
+        response.put("status", "success");
+        response.put("count", doctors.size());
+        response.put("timestamp", LocalDateTime.now());
+        response.put("hospital", "City Hospital");
+        response.put("doctors", doctors);
+        return response;
+    }
+
+    // ====== /appointments ======
+    @GetMapping("/appointments")
+    public Map<String, Object> getAllAppointments() {
+        Map<String, Object> response = new HashMap<>();
+        response.put("status", "success");
+        response.put("count", appointments.size());
+        response.put("timestamp", LocalDateTime.now());
+        response.put("hospital", "City Hospital");
+        response.put("appointments", appointments);
+        return response;
+    }
+}
