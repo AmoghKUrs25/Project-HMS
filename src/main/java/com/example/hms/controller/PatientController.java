@@ -29,6 +29,7 @@ public class PatientController {
     private final List<Patient> patients = new ArrayList<>();
 
     public PatientController() {
+        // Sample data
         patients.add(new Patient(1, "Amogh", 22, "Fever"));
         patients.add(new Patient(2, "Riya", 30, "Flu"));
     }
