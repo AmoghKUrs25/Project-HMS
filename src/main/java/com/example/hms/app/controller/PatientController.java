@@ -29,13 +29,12 @@ public class PatientController {
     private final List<Patient> patients = new ArrayList<>();
 
     public PatientController() {
-        patients.add(new Patient(1, "Amogh", 22, "Fever"));
-        patients.add(new Patient(2, "Riya", 27, "Flu"));
-        patients.add(new Patient(3, "Amogh m n", 22, "Fever"));
-        patients.add(new Patient(4, "Priyanka", 22, "all good"));
-
-
-
+        patients.add(new Patient(1, "Riya", 24, "Fever"));
+        patients.add(new Patient(2, "Amogh K Urs", 20, "Fever"));
+        patients.add(new Patient(3, "Akash S U", 20, "cough"));
+        patients.add(new Patient(4, "Advaith C Patil", 20, "cold"));
+        patients.add(new Patient(5, "Abhishek Kashyap j ", 20, "Headache"));
+        patients.add(new Patient(6, "Abhishek V Jadav", 22, "Flu"));
 
     }
 
