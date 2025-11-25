@@ -31,8 +31,6 @@ public class PatientController {
     public PatientController() {
         patients.add(new Patient(1, "Amogh", 22, "Fever"));
         patients.add(new Patient(2, "Riya", 27, "Flu"));
-        patients.add(new Patient(3, "urs", 21, "Fever"));
-        patients.add(new Patient(1, "kashyap", 52, "Fever"));
 
 
     }
